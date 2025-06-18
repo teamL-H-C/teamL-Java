@@ -1,3 +1,5 @@
+package com.example.beer.service;
+
 import com.example.beer.model.User;
 import com.example.beer.repository.UserRepository;
 
