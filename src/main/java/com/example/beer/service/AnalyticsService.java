@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import java.util.stream.Collectors;
 
 @Service
-public class  AnalyticsService  implements UserDetailsService {
+public class  AnalyticsService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
