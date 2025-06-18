@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>販売記録フォーム</title>
+</head>
+<body>
+<h2>販売登録フォーム</h2>
+
+<form th:action="@{/sales/new}" th:object="${salesRecord}" method="post">
+    <input type="hidden" th:field="*{id}" />
+
+    <label>販売日:</label>
+    <input type="date" th:field="*{salesDate}" /><br/>
+
+    <!-- 商品ごとの販売数入力 -->
+    <h3>商品別販売数</h3>
+    <div th:each="i : ${#numbers.sequence(0, beerList.size() - 1)}">
+        <input type="hidden" name="details[__${i}__].beer.id" th:value="${beerList[i].id}" />
+        <label th:text="${beerList[i].name}"></label>
+        <input type="number" min="0" name="details[__${i}__].quantity" value="0" /><br/>
+    </div>
+
+    <button type="submit">保存</button>
+</form>
+
+<a th:href="@{/sales}">戻る</a>
+</body>
+</html>
