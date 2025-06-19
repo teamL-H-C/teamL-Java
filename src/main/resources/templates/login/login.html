@@ -2,31 +2,24 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>ログイン</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <title>メッセージ一覧</title>
 </head>
 <body>
-    <h2>ログイン</h2>
+    <h1>投稿メッセージ</h1>
 
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label for="email">メールアドレス：</label>
-            <input type="text" id="email" name="username" required>
-        </div>
-        <div>
-            <label for="password">パスワード：</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit">ログイン</button>
-        </div>
-
-        <div th:if="${param.error}">
-            <p style="color:red;">メールアドレスまたはパスワードが間違っています。</p>
-        </div>
-        <div th:if="${param.logout}">
-            <p style="color:green;">ログアウトしました。</p>
-        </div>
+    <form method="post" action="/post">
+        <input type="text" name="name" placeholder="名前">
+        <input type="text" name="text" placeholder="メッセージ">
+        <button type="submit">投稿</button>
     </form>
+
+    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+
+    <ul>
+        <li th:each="msg : ${messages}">
+            <strong th:text="${msg.name}">名前</strong>: 
+            <span th:text="${msg.text}">本文</span>
+        </li>
+    </ul>
 </body>
 </html>

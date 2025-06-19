@@ -1,13 +1,35 @@
 package com.example.beer.controller;
 
+import com.example.beer.service.UserService;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class LoginController {
 
-    @GetMapping("/login")
-    public String loginForm() {
-        return "login"; // templates/login.html を表示
+    private final LoginService loginService;
+
+    public LoginController(LoginService loginService) {
+        this.loginService = loginService;
+    }
+
+    @GetMapping("/")
+      public String LoginPage() {
+        return "login";
+    }
+
+
+    @PostMapping("/login")
+    public String login(@RequestParam String username,
+                        @RequestParam String password,
+                        Model model) {
+        if (service.login(username, password)) {
+            return "dashboard"; // ログイン成功
+        } else {
+            model.addAttribute("error", "ユーザー名またはパスワードが間違っています");
+            return "login"; // ログイン失敗
+        }
     }
 }
