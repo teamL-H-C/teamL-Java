@@ -2,35 +2,29 @@ package com.example.beer.service;
 
 import com.example.beer.model.User;
 import com.example.beer.repository.UserRepository;
-import com.example.beer.util.PasswordUtil;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
 
-    private final UserRepository repository;
+    private final UserRepository userRepository;
 
-    public UserService(UserRepository repository) {
-        this.repository = repository;
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public boolean login(String username, String password) {
-        User user = repository.findByUsername(username);
-        if (user == null)
-            return false;
-
-        String hashed = PasswordUtil.hash(password);
-        return hashed.equals(user.getPasswordHash());
+    public List<User> findAll() {
+        return userRepository.findAll();
     }
 
-    public void register(String username, String password) {
-        String hashed = PasswordUtil.hash(password);
-        User user = new User(username, hashed);
-        repository.save(user);
+    public Optional<User> findById(Long id) {
+        return userRepository.findById(id);
     }
 
-    public boolean userExists(String username) {
-        return repository.findByUsername(username) != null;
+    public void save(User user) {
+        userRepository.save(user);
     }
-
 }

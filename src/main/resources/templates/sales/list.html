@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>販売実績一覧</title>
+</head>
+<body>
+<h2>販売実績一覧</h2>
+
+<a th:href="@{/sales/new}">新規登録</a>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>日付</th>
+            <th>登録者</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="record : ${salesList}">
+            <td th:text="${record.id}">1</td>
+            <td th:text="${record.salesDate}">2025-06-17</td>
+            <td th:text="${record.user.email}">user@example.com</td>
+            <td>
+                <a th:href="@{'/sales/' + ${record.id} + '/edit'}">編集</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>
