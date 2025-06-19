@@ -3,7 +3,6 @@ package com.example.beer.service;
 import com.example.beer.model.User;
 import com.example.beer.repository.UserRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -14,9 +13,11 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public List<User> findAll() {
@@ -31,13 +32,9 @@ public class UserService {
         userRepository.save(user);
     }
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
     public void register(String username, String email, String plainPassword) {
-        String hash = passwordEncoder.encode(plainPassword); // ← これが正しい！！
+        String hash = passwordEncoder.encode(plainPassword); // ✔️ ここでハッシュ化
         User user = new User(username, email, hash, true);
         userRepository.save(user);
     }
-
 }
