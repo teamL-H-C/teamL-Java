@@ -8,6 +8,6 @@ public class LoginController {
 
     @GetMapping("/login")
     public String loginForm() {
-        return "login"; // templates/login.html を表示
+        return "login/login"; // templates/login.html を表示
     }
 }

@@ -41,7 +41,7 @@ public class UserController {
 
     // 編集フォーム
     @GetMapping("/{id}/edit")
-    public String editForm(@PathVariable Long id, Model model) {
+    public String editForm(@PathVariable Integer id, Model model) {
         Optional<User> user = userService.findById(id);
         if (user.isPresent()) {
             model.addAttribute("user", user.get());
