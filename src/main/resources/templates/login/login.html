@@ -2,24 +2,26 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>メッセージ一覧</title>
+    <title>Login</title>
+    <style>
+        body { background: #f2f2f2; font-family: sans-serif; }
+        .login-container { max-width: 400px; margin: 60px auto; background: #fff; padding: 32px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        h1 { text-align: center; margin-bottom: 24px; }
+        input[type="text"], input[type="password"] { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; }
+        button { width: 100%; padding: 12px; background: #007bff; color: #fff; border: none; border-radius: 4px; font-size: 1.1em; cursor: pointer; }
+        button:hover { background: #0056b3; }
+        .error { color: red; text-align: center; margin-bottom: 12px; }
+    </style>
 </head>
 <body>
-    <h1>投稿メッセージ</h1>
-
-    <form method="post" action="/post">
-        <input type="text" name="name" placeholder="名前">
-        <input type="text" name="text" placeholder="メッセージ">
-        <button type="submit">投稿</button>
-    </form>
-
-    <p th:if="${error}" th:text="${error}" style="color:red;"></p>
-
-    <ul>
-        <li th:each="msg : ${messages}">
-            <strong th:text="${msg.name}">名前</strong>: 
-            <span th:text="${msg.text}">本文</span>
-        </li>
-    </ul>
+    <div class="login-container">
+        <h1>新しいログインページ</h1>
+        <form method="post" action="/login">
+            <input type="text" name="username" placeholder="Username" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <button type="submit">Sign in</button>
+        </form>
+        <div th:if="${error}" th:text="${error}" class="error"></div>
+    </div>
 </body>
 </html>

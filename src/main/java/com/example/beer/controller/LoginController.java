@@ -1,6 +1,6 @@
 package com.example.beer.controller;
 
-import com.example.beer.service.UserService;
+import com.example.beer.service.LoginService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,16 +16,20 @@ public class LoginController {
     }
 
     @GetMapping("/")
-      public String LoginPage() {
-        return "login";
+    public String loginPage() {
+        return "login/login";
     }
 
+    @GetMapping("/login")
+    public String loginGet() {
+        return "login/login";
+    }
 
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         Model model) {
-        if (service.login(username, password)) {
+        if (loginService.authenticate(username, password)) {
             return "dashboard"; // ログイン成功
         } else {
             model.addAttribute("error", "ユーザー名またはパスワードが間違っています");
