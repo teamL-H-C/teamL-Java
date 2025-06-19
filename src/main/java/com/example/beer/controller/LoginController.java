@@ -1,7 +1,6 @@
 package com.example.beer.controller;
 
-import com.example.beer.service.UserService;
-
+import com.example.beer.service.LoginService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,16 +15,15 @@ public class LoginController {
     }
 
     @GetMapping("/")
-      public String LoginPage() {
+    public String LoginPage() {
         return "login";
     }
-
 
     @PostMapping("/login")
     public String login(@RequestParam String username,
                         @RequestParam String password,
                         Model model) {
-        if (service.login(username, password)) {
+        if (loginService.authenticate(username, password)) {
             return "dashboard"; // ログイン成功
         } else {
             model.addAttribute("error", "ユーザー名またはパスワードが間違っています");
@@ -33,3 +31,4 @@ public class LoginController {
         }
     }
 }
+
