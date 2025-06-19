@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>ユーザー一覧</title>
+  <!-- （必要なら）共通 CSS -->
+  <link rel="stylesheet" th:href="@{/css/box.css}" />
+</head>
+<body>
+
+<h1>ユーザー一覧 /users</h1>
+
+<div class="box">
+  <h2>　ユーザー一覧　</h2>
+
+  <table class="box-table">
+    <thead>
+      <tr>
+        <th>氏名</th><th>ロール</th><th>メール</th><th>編集</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr th:each="u : ${users}">
+        <td th:text="${u.name}">山田</td>
+        <td th:text="${u.role}">STAFF</td>
+        <td th:text="${u.email}">a@x.jp</td>
+        <td>
+          <a th:href="@{/users/{id}/edit(id=${u.id})}">[✎]</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="action-row">
+    <a th:href="@{/users/new}" class="btn-link">[ 新規登録 ]</a>
+  </div>
+</div>
+
+</body>
+</html>
