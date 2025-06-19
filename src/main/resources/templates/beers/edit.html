@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>商品編集</title>
+  <link rel="stylesheet" th:href="@{/css/beer.css}"/>
+</head>
+<body>
+
+<h1>商品編集 /beers-edit</h1>
+
+<div class="beer-box">
+  <h2>　商品編集　</h2>
+
+  <form th:action="@{/beers/{id}(id=${beer.id})}" th:object="${beer}" method="post">
+    <input type="hidden" name="_method" value="put"/>
+
+    <table class="beer-form">
+      <tr>
+        <td>商品名:</td>
+        <td><input th:field="*{name}" required/></td>
+      </tr>
+      <tr>
+        <td>価格:</td>
+        <td><input th:field="*{price}" type="number" min="0" required/> 円</td>
+      </tr>
+      <tr>
+        <td>JANコード:</td>
+        <td><input th:field="*{jancode}"/></td>
+      </tr>
+      <tr>
+        <td>販売中/停止:</td>
+        <td>
+          <select th:field="*{enabled}">
+            <option th:value="true">販売中</option>
+            <option th:value="false">停止</option>
+          </select>
+        </td>
+      </tr>
+    </table>
+
+    <div class="action-row">
+      <button type="submit">[ 更新 ]</button>
+      <a th:href="@{/beers}" class="btn-link">[ 戻る ]</a>
+    </div>
+  </form>
+</div>
+
+</body>
+</html>
