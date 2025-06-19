@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>発注予測分析</title>
+  <link rel="stylesheet" th:href="@{/style.css}">
+ 
+  <script>
+    // ページ読み込み時に現在の時刻を表示する関数
+    function showCurrentTime() {
+      const now = new Date();
+      const timeString = now.toLocaleTimeString('ja-JP', {
+        hour: '2-digit', minute: '2-digit', second: '2-digit'
+      });
+      document.getElementById('current-time').textContent = timeString;
+    }
+    setInterval(showCurrentTime, 1000); // 1秒ごとに更新
+    window.onload = showCurrentTime;
+  </script>
+</head>
+<body class="bg-gray-100 font-sans p-8">
+  <div class="max-w-xl mx-auto bg-white rounded-lg shadow p-6 border">
+    <div class="flex justify-between items-center mb-4">
+      <h1 class="text-xl font-bold">発注予測分析</h1>
+      <div class="text-sm text-gray-600">現在時刻：<span id="current-time"></span></div>
+    </div>
+ 
+    <div class="mb-6">
+      <label class="block font-semibold mb-1">▼ 対象週：</label>
+      <select class="border rounded px-3 py-1 w-full">
+        <option>2025年6月第3週</option>
+        <option>2025年6月第4週</option>
+        <option>2025年7月第1週</option>
+      </select>
+    </div>
+ 
+    <div class="mb-4">
+      <h2 class="font-bold text-lg mb-1">■ 月曜日の推奨発注</h2>
+      <p class="text-gray-700">IPA：15本、黒ビール：6本 ...</p>
+    </div>
+ 
+    <div class="mb-6">
+      <h2 class="font-bold text-lg mb-1">■ 木曜日の推奨発注</h2>
+      <p class="text-gray-700">IPA：18本、黒ビール：5本 ...</p>
+    </div>
+ 
+    <div class="text-right">
+      <button class="text-blue-600 underline">[ 戻る ]</button>
+    </div>
+  </div>
+</body>
+</html>
+ 
