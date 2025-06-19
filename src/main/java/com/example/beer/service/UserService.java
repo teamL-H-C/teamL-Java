@@ -2,6 +2,9 @@ package com.example.beer.service;
 
 import com.example.beer.model.User;
 import com.example.beer.repository.UserRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,4 +30,14 @@ public class UserService {
     public void save(User user) {
         userRepository.save(user);
     }
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    public void register(String username, String email, String plainPassword) {
+        String hash = passwordEncoder.encode(plainPassword); // ← これが正しい！！
+        User user = new User(username, email, hash, true);
+        userRepository.save(user);
+    }
+
 }

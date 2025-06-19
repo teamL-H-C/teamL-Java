@@ -8,6 +8,6 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard() {
-        return "dashboard"; // templates/dashboard.html を表示
+        return "dashboard/dashboard"; // templates/dashboard.html を表示
     }
 }
