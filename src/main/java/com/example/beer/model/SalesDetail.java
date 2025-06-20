@@ -30,6 +30,10 @@ public class SalesDetail {
         return quantity;
     }
 
+    public Beer getBeer() {
+        return beer;
+    }
+
     public LocalDateTime getDate() {
         return date;
     }
