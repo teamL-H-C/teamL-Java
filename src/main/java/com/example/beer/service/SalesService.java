@@ -1,7 +1,9 @@
 package com.example.beer.service;
 
+import com.example.beer.model.SalesDetail;
 import com.example.beer.model.SalesRecord;
-import com.example.beer.repository.SalesRepository;
+import com.example.beer.repository.SalesDetailRepository;
+import com.example.beer.repository.SalesRecordRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -10,10 +12,17 @@ import java.util.Optional;
 @Service
 public class SalesService {
 
-    private final SalesRepository salesRepository;
+    private final SalesRecordRepository salesRepository;
+    private final SalesDetailRepository salesDetailRepository;
 
-    public SalesService(SalesRepository salesRepository) {
+    public SalesService(SalesRecordRepository salesRepository,
+                        SalesDetailRepository salesDetailRepository) {
         this.salesRepository = salesRepository;
+        this.salesDetailRepository = salesDetailRepository;
+    }
+
+    public List<SalesDetail> findDetailAll() {
+        return salesDetailRepository.findAll();
     }
 
     public List<SalesRecord> findAll() {

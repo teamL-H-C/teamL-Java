@@ -2,9 +2,7 @@
 
 <body>
     <h2>ダッシュボード</h2>
-
-    <!-- 管理者専用 -->
-    <div sec:authorize="hasRole('ADMIN')">
+    <div>
         <a href="/sales">販売実績一覧</a>
         <a href="/sales-new">販売実績登録</a>
         <a href="/sales/{id}/edit">販売実績編集</a>
@@ -14,17 +12,6 @@
         <a href="/users">ユーザー一覧</a>
         <a href="/users-new">ユーザー登録</a>
         <a href="/users/{id}/edit">ユーザー編集</a>
-        <a href="/analytics">発注予測分析</a>
-        <a href="/logout">ログアウト</a>
-
-    </div>
-
-    <!-- 従業員専用 -->
-    <div sec:authorize="hasRole('EMPLOYEE')">
-        <a href="/sales">販売実績一覧</a>
-        <a href="/sales-new">販売実績登録</a>
-        <a href="/sales/{id}/edit">販売実績編集</a>
-        <a href="/beers">商品一覧</a>
         <a href="/analytics">発注予測分析</a>
         <a href="/logout">ログアウト</a>
     </div>

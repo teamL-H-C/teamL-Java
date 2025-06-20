@@ -58,19 +58,7 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 
-@Bean
-public CommandLineRunner setupTestUser(UserRepository userRepository, PasswordEncoder encoder) {
-    return args -> {
-        if (userRepository.findByEmailAndEnabledTrue("test@gmail.com").isEmpty()) {
-            User user = new User();
-            user.setUsername("テストユーザー");
-            user.setEmail("test@gmail.com");
-            user.setPasswordHash(encoder.encode("test")); // ← BCrypt でエンコード！
-            user.setEnabled(true);
-            userRepository.save(user);
-            System.out.println("✅ 初期ユーザー登録完了: test@gmail.com / test");
-        }
-    };
-}
 
 }
+
+
