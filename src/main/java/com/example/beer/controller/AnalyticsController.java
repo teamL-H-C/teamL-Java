@@ -1,14 +1,21 @@
 package com.example.beer.controller;
 
-import org.springframework.stereotype.Controller;
+import com.example.beer.model.AnalyticsResponse;
+import com.example.beer.service.AnalyticsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
+@RequestMapping("/analytics")
 public class AnalyticsController {
 
-    @GetMapping("/analytics")
-    public String showAnalytics() {
-        return "analytics/index";
+    @Autowired
+    private AnalyticsService analyticsService;
+
+    @GetMapping("/weekly")
+    public AnalyticsResponse getWeeklyPredictions() {
+        return analyticsService.fetchWeeklyPredictions();
     }
 }
-
