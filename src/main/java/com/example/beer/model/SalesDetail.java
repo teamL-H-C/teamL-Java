@@ -1,5 +1,6 @@
 package com.example.beer.model;
 
+import java.time.LocalDateTime;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,8 +11,6 @@ public class SalesDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private int quantity;
-
     @ManyToOne
     @JoinColumn(name = "records_id")
     private SalesRecord salesRecord;
@@ -20,5 +19,18 @@ public class SalesDetail {
     @JoinColumn(name = "beers_id")
     private Beer beer;
 
-    public SalesDetail() {}
+    private Integer quantity;
+
+    private LocalDateTime date;
+
+    public SalesDetail() {
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
+    }
 }

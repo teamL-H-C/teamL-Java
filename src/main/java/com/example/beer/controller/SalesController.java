@@ -1,12 +1,15 @@
 package com.example.beer.controller;
 
 import com.example.beer.model.SalesRecord;
+import com.example.beer.model.SalesDetail;
 import com.example.beer.service.SalesService;
 import com.example.beer.service.BeerService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("/sales")
@@ -22,7 +25,9 @@ public class SalesController {
 
     @GetMapping
     public String list(Model model) {
-        model.addAttribute("salesList", salesService.findAll());
+        List<SalesDetail> detail = salesService.findDetailAll();
+        System.out.println(detail);
+        model.addAttribute("salesList", detail);
         return "sales/list";
     }
 

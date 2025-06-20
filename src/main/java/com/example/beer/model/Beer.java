@@ -17,11 +17,15 @@ public class Beer {
 
     private String jancode;
 
-    private boolean enabled;
+    private Boolean enabled;
 
     private LocalDateTime createdAt;
 
     private LocalDateTime updatedAt;
 
     public Beer() {}
+
+    public String getName() {
+        return name;
+    }
 }
