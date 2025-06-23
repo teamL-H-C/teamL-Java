@@ -4,29 +4,54 @@
     <meta charset="UTF-8">
     <title>ログイン</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/login.css}">
+    <style>
+        body, html {
+            cursor: url('/cursors/cat.cur'), auto;
+        }
+        button, input, label, .login-container {
+            cursor: url('/cursors/cat.cur'), pointer;
+        }
+    </style>
 </head>
 <body>
-    <h2>ログイン</h2>
-
-    <form th:action="@{/login}" method="post">
-        <div>
-            <label for="email">メールアドレス：</label>
-            <input type="text" id="email" name="username" required>
+    <div class="emoji-bg">
+        <span style="left:10%;top:12%;">🍺</span>
+        <span style="left:30%;top:60%;">🍻</span>
+        <span style="left:70%;top:20%;">👨‍🍳</span>
+        <span style="left:80%;top:75%;">🍺</span>
+        <span style="left:55%;top:40%;">👩‍🍳</span>
+        <span style="left:15%;top:80%;">🍻</span>
+        <span style="left:85%;top:10%;">🍺</span>
+        <span style="left:40%;top:15%;">👨‍🍳</span>
+        <span style="left:60%;top:70%;">🍻</span>
+    </div>
+    <div class="login-container">
+        <div style="text-align:center; font-size:2.5rem; margin-bottom:10px;">
+            <span class="beer-emoji">🍺</span>
+            <span class="beer-emoji">🍻</span>
+            <span class="beer-emoji">🍺</span>
         </div>
-        <div>
-            <label for="password">パスワード：</label>
-            <input type="password" id="password" name="password" required>
-        </div>
-        <div>
-            <button type="submit">ログイン</button>
-        </div>
-
-        <div th:if="${param.error}">
-            <p style="color:red;">メールアドレスまたはパスワードが間違っています。</p>
-        </div>
-        <div th:if="${param.logout}">
-            <p style="color:green;">ログアウトしました。</p>
-        </div>
-    </form>
+        <h2 class="login-title">ログイン</h2>
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="email">メールアドレス：</label>
+                <input type="text" id="email" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="password">パスワード：</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div class="form-group">
+                <button type="submit">ログイン</button>
+            </div>
+            <div th:if="${param.error}" class="error-message">
+                メールアドレスまたはパスワードが間違っています。
+            </div>
+            <div th:if="${param.logout}" class="success-message">
+                ログアウトしました。
+            </div>
+        </form>
+    </div>
 </body>
 </html>

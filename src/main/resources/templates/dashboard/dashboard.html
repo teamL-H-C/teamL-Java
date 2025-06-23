@@ -1,35 +1,85 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
 <head>
     <meta charset="UTF-8">
     <title>ダッシュボード</title>
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
 </head>
+
 <body>
-    <h1>ダッシュボード</h1>
+    <!-- 管理者専用 -->
+    <div sec:authorize="hasRole('ROLE_ADMIN')" class="dashboard-section">
+    <h2 th:text="${username + 'さん、こんにちは！'}"></h2>
 
-    <p>ようこそ、<span sec:authentication="name"></span> さん</p>
-
-    <!-- 共通リンク -->
-    <div>
-        <a href="/sales">販売実績一覧</a><br>
-        <a href="/sales-new">販売実績登録</a><br>
-        <a href="/beers">商品一覧</a><br>
-        <a href="/analytics">発注予測分析</a><br>
+    <div class="emoji-bg">
+        <span style="left:10%;top:20%;">🍺</span>
+        <span style="left:30%;top:60%;">🍻</span>
+        <span style="left:70%;top:40%;">🍺</span>
+        <span style="left:80%;top:10%;">🍻</span>
+        <span style="left:50%;top:80%;">🍺</span>
+        <span style="left:20%;top:70%;">🍻</span>
+    </div>
+    <div class="dashboard-section">
+        <a class="dashboard-card" href="/sales">販売実績一覧</a>
+        <a class="dashboard-card" href="/sales-new">販売実績登録 <span class="coming-soon">Coming Soon</span></a>
+        <a class="dashboard-card" href="/sales/{id}/edit">販売実績編集 <span class="coming-soon">Coming Soon</span></a>
+        <a class="dashboard-card" href="/beers">商品一覧</a>
+        <a class="dashboard-card" href="/beers-new">商品登録 <span class="coming-soon">Coming Soon</span></a>
+        <a class="dashboard-card" href="/beers/{id}/edit">商品編集 <span class="coming-soon">Coming Soon</span></a>
+        <a class="dashboard-card" href="/users">ユーザー一覧</a>
+        <a class="dashboard-card" href="/users-new">ユーザー登録 <span class="coming-soon">Coming Soon</span></a>
+        <a class="dashboard-card" href="/users/{id}/edit">ユーザー編集 <span class="coming-soon">Coming Soon</span></a>
+        <form action="/analytics/weekly" method="get" style="display:inline;">
+            <button class="dashboard-card" type="submit">📊 発注予測分析</button>
+        </form>
+        <a class="dashboard-card" href="/logout">ログアウト</a>
+    </div>
     </div>
 
-    <!-- 管理者だけに表示 -->
-    <div sec:authorize="hasRole('ROLE_ADMIN')">
-        <h3>管理者メニュー</h3>
-        <a href="/beers-new">商品登録</a><br>
-        <a href="/beers/{id}/edit">商品編集</a><br>
-        <a href="/users">ユーザー一覧</a><br>
-        <a href="/users-new">ユーザー登録</a><br>
-        <a href="/users/{id}/edit">ユーザー編集</a><br>
-    </div>
+    <style>
+        .coming-soon {
+            font-size: 0.8em;
+            color: #ff9800;
+            background: #fff3e0;
+            border-radius: 8px;
+            padding: 2px 6px;
+            margin-left: 6px;
+            vertical-align: middle;
+        }
+    </style>
 
-    <div>
-        <a href="/logout">ログアウト</a>
-    </div>
+    <!-- 従業員専用 -->
+    <div sec:authorize="hasRole('ROLE_STAFF')" class="dashboard-section">
+        <div class="emoji-bg">
+            <span role="img" aria-label="emoji">🍺</span>
+            <span role="img" aria-label="emoji">🍻</span>
+            <span role="img" aria-label="emoji">🥂</span>
+            <span role="img" aria-label="emoji">🍷</span>
+            <span role="img" aria-label="emoji">🍸</span>
+        </div>
+        <h2 th:text="${username + 'さん、こんにちは！'}"></h2>
+
+        <div class="dashboard-section">
+            <a class="dashboard-card" href="/sales">販売実績一覧</a>
+            <a class="dashboard-card" href="/sales-new">販売実績登録 <span class="coming-soon">Coming Soon</span></a>
+            <a class="dashboard-card" href="/sales/{id}/edit">販売実績編集 <span class="coming-soon">Coming Soon</span></a>
+            <a class="dashboard-card" href="/beers">商品一覧</a>
+            <form action="/analytics/weekly" method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">📊 発注予測分析</button>
+            </form>
+            <a class="dashboard-card" href="/logout">ログアウト</a>
+        </div>
+
+        <style>
+            .coming-soon {
+                font-size: 0.8em;
+                color: #ff9800;
+                background: #fff3e0;
+                border-radius: 8px;
+                padding: 2px 6px;
+                margin-left: 6px;
+                vertical-align: middle;
+            }
+        </style>
 </body>
 </html>

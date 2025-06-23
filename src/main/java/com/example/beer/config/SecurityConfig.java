@@ -1,9 +1,6 @@
 package com.example.beer.config;
 
-import com.example.beer.model.User;
-import com.example.beer.repository.UserRepository;
 import com.example.beer.service.LoginUserDetailsService;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,13 +21,13 @@ public class SecurityConfig {
         this.userDetailsService = userDetailsService;
     }
 
-    // ✅ AuthenticationManager を明示的に提供（重要）
+    // AuthenticationManager を明示的に提供（重要）
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
     }
 
-    // ✅ SecurityFilterChain は userDetailsService を使わない（ここでは不要）
+    // SecurityFilterChain は userDetailsService を使わない（ここでは不要）
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
