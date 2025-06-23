@@ -1,17 +1,34 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title>ダッシュボード</title>
+</head>
 <body>
-    <h2>ダッシュボード</h2>
+    <h1>ダッシュボード</h1>
+
+    <p>ようこそ、<span sec:authentication="name"></span> さん</p>
+
+    <!-- 共通リンク -->
     <div>
-        <a href="/sales">販売実績一覧</a>
-        <a href="/sales-new">販売実績登録</a>
-        <a href="/sales/{id}/edit">販売実績編集</a>
-        <a href="/beers">商品一覧</a>
-        <a href="/beers-new">商品登録</a>
-        <a href="/beers/{id}/edit">商品編集</a>
-        <a href="/users">ユーザー一覧</a>
-        <a href="/users-new">ユーザー登録</a>
-        <a href="/users/{id}/edit">ユーザー編集</a>
-        <a href="/analytics">発注予測分析</a>
+        <a href="/sales">販売実績一覧</a><br>
+        <a href="/sales-new">販売実績登録</a><br>
+        <a href="/beers">商品一覧</a><br>
+        <a href="/analytics">発注予測分析</a><br>
+    </div>
+
+    <!-- 管理者だけに表示 -->
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <h3>管理者メニュー</h3>
+        <a href="/beers-new">商品登録</a><br>
+        <a href="/beers/{id}/edit">商品編集</a><br>
+        <a href="/users">ユーザー一覧</a><br>
+        <a href="/users-new">ユーザー登録</a><br>
+        <a href="/users/{id}/edit">ユーザー編集</a><br>
+    </div>
+
+    <div>
         <a href="/logout">ログアウト</a>
     </div>
 </body>
