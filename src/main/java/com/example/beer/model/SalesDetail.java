@@ -1,6 +1,8 @@
 package com.example.beer.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -23,18 +25,47 @@ public class SalesDetail {
 
     private LocalDateTime date;
 
-    public SalesDetail() {
+    public SalesDetail() {}
+
+    // --- Getter ---
+    public Long getId() {
+        return id;
     }
 
-    public Integer getQuantity() {
-        return quantity;
+    public SalesRecord getSalesRecord() {
+        return salesRecord;
     }
 
     public Beer getBeer() {
         return beer;
     }
 
-    public LocalDateTime getDate() {
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public LocalDateTime getDateTime() {
         return date;
+    }
+
+    // ✔ グルーピング用（LocalDateだけ取り出す）
+    public LocalDate getDate() {
+        return date.toLocalDate();
+    }
+
+    public void setSalesRecord(SalesRecord salesRecord) {
+        this.salesRecord = salesRecord;
+    }
+
+    public void setBeer(Beer beer) {
+        this.beer = beer;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public void setDate(LocalDateTime date) {
+        this.date = date;
     }
 }

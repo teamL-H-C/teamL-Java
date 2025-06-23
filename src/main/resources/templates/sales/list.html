@@ -1,67 +1,76 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>販売実績一覧</title>
     <style>
         body {
-            font-family: sans-serif;
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            margin: 0;
             padding: 20px;
-            background-color: #f5f5f5;
         }
 
-        h2 {
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            text-align: center;
             color: #333;
         }
 
         table {
-            border-collapse: collapse;
             width: 100%;
-            margin-bottom: 20px;
-            background-color: white;
+            border-collapse: collapse;
+            margin-top: 10px;
         }
 
-        th,
-        td {
-            border: 1px solid #ccc;
+        th, td {
             padding: 10px;
+            border-bottom: 1px solid #ccc;
             text-align: center;
         }
 
-        .nested-table {
-            width: 100%;
-            border: none;
+        th {
+            background: #f0f8ff;
         }
 
-        .nested-table td {
-            border: none;
-            padding: 5px;
-        }
-
-        .record-header {
-            background-color: #eef;
+        .date-header {
+            margin-top: 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #444;
         }
     </style>
 </head>
-
 <body>
-    <h2>販売実績一覧</h2>
+<div class="container">
+    <h1>販売実績一覧（日付別）</h1>
 
-    <table>
-        <tr class="record-header">
-            <th>販売日</th>
-            <th>商品名</th>
-            <th>数量</th>
-        </tr>
+    <div th:each="entry : ${groupedSales}">
+        <h2 class="date-header" th:text="${#temporals.format(entry.key, 'yyyy年MM月dd日')}">日付</h2>
 
-        <tr th:each="record : ${salesList}">
-            <td th:text="${record.date}">販売日</td>
-            <td th:text="${record.beer.name}">商品名</td>
-            <td th:text="${record.quantity}">数量</td>
-        </tr>
-    </table>
-
+        <table>
+            <thead>
+                <tr>
+                    <th>商品名</th>
+                    <th>数量</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${entry.value}">
+                    <td th:text="${item.beer.name}">商品名</td>
+                    <td th:text="${item.quantity}">数量</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
 </body>
-
 </html>
