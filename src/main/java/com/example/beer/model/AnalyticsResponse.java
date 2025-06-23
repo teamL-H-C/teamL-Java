@@ -8,6 +8,7 @@ public class AnalyticsResponse {
     private String start_date;
     private Map<String, Object> shipment_summary;
     private List<AnalyticsPredictionDetail> daily_details;
+    private Map<String, Object> performance_metrics;
     private String comment;
 
     public String getStart_date() { return start_date; }
@@ -18,6 +19,9 @@ public class AnalyticsResponse {
 
     public List<AnalyticsPredictionDetail> getDaily_details() { return daily_details; }
     public void setDaily_details(List<AnalyticsPredictionDetail> daily_details) { this.daily_details = daily_details; }
+
+    public Map<String, Object> getPerformance_metrics() { return performance_metrics; }
+    public void setPerformance_metrics(Map<String, Object> performance_metrics) { this.performance_metrics = performance_metrics; }
 
     public String getComment() { return comment; }
     public void setComment(String comment) { this.comment = comment; }

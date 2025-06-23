@@ -6,7 +6,7 @@ import java.util.Map;
 public class AnalyticsPredictionDetail {
     private String date;
     private int weekday;
-    private Map<String, Integer> predictions;
+    private Map<String, Double> predictions;
 
     public String getDate() { return date; }
     public void setDate(String date) { this.date = date; }
@@ -14,6 +14,6 @@ public class AnalyticsPredictionDetail {
     public int getWeekday() { return weekday; }
     public void setWeekday(int weekday) { this.weekday = weekday; }
 
-    public Map<String, Integer> getPredictions() { return predictions; }
-    public void setPredictions(Map<String, Integer> predictions) { this.predictions = predictions; }
+    public Map<String, Double> getPredictions() { return predictions; }
+    public void setPredictions(Map<String, Double> predictions) { this.predictions = predictions; }
 }
