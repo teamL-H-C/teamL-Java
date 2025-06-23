@@ -8,7 +8,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class LoginUserDetailsService implements UserDetailsService {
@@ -25,14 +24,15 @@ public class LoginUserDetailsService implements UserDetailsService {
         User user = userRepository.findByEmailAndEnabledTrue(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
 
-        // Spring Security に渡す UserDetails を生成
+        // UserDetails を生成（ロールは仮で "ROLE_USER" を付与）
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPasswordHash(),
-                user.getEnabled(), // enabled
-                true, // accountNonExpired
-                true, // credentialsNonExpired
-                true, // accountNonLocked
-                );
+                user.getEnabled(),       // enabled
+                true,                    // accountNonExpired
+                true,                    // credentialsNonExpired
+                true,                    // accountNonLocked
+                List.of(new SimpleGrantedAuthority("ROLE_USER")) // ← これが必要
+        );
     }
 }
