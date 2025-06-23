@@ -2,12 +2,12 @@ package com.example.beer.service;
 
 import com.example.beer.model.User;
 import com.example.beer.repository.UserRepository;
-
 import org.springframework.security.core.userdetails.*;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class LoginUserDetailsService implements UserDetailsService {
@@ -20,19 +20,24 @@ public class LoginUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        // 有効なユーザーを取得
+        // 有効なユーザーを取得（メールアドレス + enabled = true）
         User user = userRepository.findByEmailAndEnabledTrue(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + email));
 
-        // UserDetails を生成（ロールは仮で "ROLE_USER" を付与）
+        // ユーザーのロールを Spring Security 用の Authority に変換
+        List<SimpleGrantedAuthority> authorities = user.getRoles().stream()
+                .map(role -> new SimpleGrantedAuthority(role.getName()))  // 例: "ROLE_ADMIN", "ROLE_STAFF"
+                .collect(Collectors.toList());
+
+        // Spring Security の UserDetails を生成して返却
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
                 user.getPasswordHash(),
-                user.getEnabled(),       // enabled
-                true,                    // accountNonExpired
-                true,                    // credentialsNonExpired
-                true,                    // accountNonLocked
-                List.of(new SimpleGrantedAuthority("ROLE_USER")) // ← これが必要
+                user.getEnabled(),
+                true,   // accountNonExpired
+                true,   // credentialsNonExpired
+                true,   // accountNonLocked
+                authorities
         );
     }
 }
