@@ -1,0 +1,148 @@
+/* login.css - Beautiful styles for the login page */
+ 
+body {
+    background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+    font-family: 'Segoe UI', Arial, sans-serif;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+ 
+/* 动态啤酒 emoji 动画 */
+.beer-emoji {
+    display: inline-block;
+    font-size: 2.5rem;
+    animation: beer-bounce 1.2s infinite alternate cubic-bezier(.5,1.8,.5,1);
+    filter: drop-shadow(0 2px 8px #f7b73188);
+}
+@keyframes beer-bounce {
+    0% { transform: translateY(0) scale(1); }
+    60% { transform: translateY(-12px) scale(1.1); }
+    100% { transform: translateY(0) scale(1); }
+}
+ 
+/* 随机分布的表情背景 */
+.emoji-bg {
+    position: fixed;
+    top: 0; left: 0; width: 100vw; height: 100vh;
+    pointer-events: none;
+    z-index: 0;
+}
+.emoji-bg span {
+    position: absolute;
+    font-size: 2.2rem;
+    opacity: 0.18;
+    animation: emoji-float 8s infinite linear;
+}
+@keyframes emoji-float {
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    100% { transform: translateY(-60px) scale(1.1) rotate(20deg); }
+}
+ 
+.login-container {
+    position: relative;
+    z-index: 1;
+    max-width: 400px;
+    width: 100%;
+    margin: 40px auto;
+    padding: 40px 32px 32px 32px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
+    backdrop-filter: blur(2px);
+    border: 1px solid rgba(255,255,255,0.3);
+}
+ 
+.login-title {
+    text-align: center;
+    margin-bottom: 28px;
+    color: #2d3a4b;
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+ 
+.form-group {
+    margin-bottom: 22px;
+}
+ 
+label {
+    display: block;
+    margin-bottom: 7px;
+    color: #4a4a4a;
+    font-size: 1rem;
+    font-weight: 500;
+}
+ 
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #bfc9d1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    background: #f7fafd;
+    transition: border 0.2s;
+}
+ 
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border: 1.5px solid #74ebd5;
+    outline: none;
+    background: #fff;
+}
+ 
+button[type="submit"] {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(90deg, #74ebd5 0%, #ACB6E5 100%);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(44, 62, 80, 0.08);
+    transition: background 0.2s, transform 0.1s;
+}
+ 
+button[type="submit"]:hover {
+    background: linear-gradient(90deg, #ACB6E5 0%, #74ebd5 100%);
+    transform: translateY(-2px) scale(1.03);
+}
+ 
+.error-message {
+    color: #d9534f;
+    text-align: center;
+    margin-bottom: 14px;
+    font-size: 1rem;
+    font-weight: 500;
+    background: #fff0f0;
+    border-radius: 4px;
+    padding: 8px 0;
+}
+ 
+.success-message {
+    color: #28a745;
+    text-align: center;
+    margin-bottom: 14px;
+    font-size: 1rem;
+    font-weight: 500;
+    background: #f0fff4;
+    border-radius: 4px;
+    padding: 8px 0;
+}
+ 
+@media (max-width: 500px) {
+    .login-container {
+        padding: 24px 8px 16px 8px;
+    }
+    .login-title {
+        font-size: 1.3rem;
+    }
+}
