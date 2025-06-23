@@ -1,5 +1,7 @@
 package com.example.beer.model;
 
+import java.util.HashSet;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -18,6 +20,8 @@ public class User {
     private String passwordHash;
 
     private boolean enabled;
+
+    private String roles;
 
     public User() {
     }
@@ -45,8 +49,12 @@ public class User {
         return passwordHash;
     }
 
-    public boolean isEnabled() {
+    public boolean getEnabled() {
         return enabled;
+    }
+
+    public String getRoles(){
+        return roles;
     }
 
     public void setUsername(String username) {

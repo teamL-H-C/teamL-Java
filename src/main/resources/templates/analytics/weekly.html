@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
 <head>
   <meta charset="UTF-8">
   <title>発注予測分析</title>
 </head>
+
 <body>
   <h1>発注予測分析</h1>
 
@@ -11,18 +13,19 @@
   <p>コメント: <span th:text="${analytics.comment}"></span></p>
 
   <h2>月曜用の出荷サマリー</h2>
-  <ul th:if="${analytics.shipment_summary != null}">
-    <li th:each="entry : ${((T(java.util.Map)).cast(analytics.shipment_summary['🍻 発注用ビール出荷集計']['月曜用の出荷集計']))}">
+  <ul th:if="${mondaySummary != null}">
+    <li th:each="entry : ${mondaySummary}">
       <span th:text="${entry.key}"></span>: <span th:text="${entry.value}"></span>
     </li>
   </ul>
 
   <h2>木曜用の出荷サマリー</h2>
-  <ul th:if="${analytics.shipment_summary != null}">
-    <li th:each="entry : ${((T(java.util.Map)).cast(analytics.shipment_summary['🍻 発注用ビール出荷集計']['木曜用の出荷集計']))}">
+  <ul th:if="${thursdaySummary != null}">
+    <li th:each="entry : ${thursdaySummary}">
       <span th:text="${entry.key}"></span>: <span th:text="${entry.value}"></span>
     </li>
   </ul>
+
 
   <h2>日別予測</h2>
   <table border="1">
@@ -36,7 +39,7 @@
       <td th:text="${detail.weekday}"></td>
       <td>
         <ul>
-          <li th:each="entry : ${detail.predictions}">
+          <li th:each="entry : ${detail.predictions.entrySet()}">
             <span th:text="${entry.key}"></span>: <span th:text="${entry.value}"></span>
           </li>
         </ul>

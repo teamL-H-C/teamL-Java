@@ -70,11 +70,6 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		<dependency>
-  	 		 <groupId>org.thymeleaf.extras</groupId>
-  	 		 <artifactId>thymeleaf-extras-springsecurity6</artifactId> <!-- Spring Boot 3.x -->
-		</dependency>
-
 	</dependencies>
 
 	<build>
