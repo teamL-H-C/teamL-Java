@@ -26,7 +26,6 @@ public class SalesController {
     @GetMapping
     public String list(Model model) {
         List<SalesDetail> detail = salesService.findDetailAll();
-        System.out.println(detail);
         model.addAttribute("salesList", detail);
         return "sales/list";
     }

@@ -2,7 +2,7 @@ package com.example.beer.config;
 
 import com.example.beer.model.User;
 import com.example.beer.repository.UserRepository;
-import com.example.beer.service.CustomUserDetailsService;
+import com.example.beer.service.LoginUserDetailsService;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -18,9 +18,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final CustomUserDetailsService userDetailsService;
+    private final LoginUserDetailsService userDetailsService;
 
-    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+    public SecurityConfig(LoginUserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <title>販売実績一覧</title>
@@ -21,7 +22,8 @@
             background-color: white;
         }
 
-        th, td {
+        th,
+        td {
             border: 1px solid #ccc;
             padding: 10px;
             text-align: center;
@@ -42,27 +44,24 @@
         }
     </style>
 </head>
+
 <body>
-<h2>販売実績一覧</h2>
+    <h2>販売実績一覧</h2>
 
-<table>
-    <tr class="record-header">
-        <th>販売日</th>
-        <th>商品名と数量</th>
-    </tr>
+    <table>
+        <tr class="record-header">
+            <th>販売日</th>
+            <th>商品名</th>
+            <th>数量</th>
+        </tr>
 
-    <tr th:each="record : ${salesList}">
-        <td th:text="${record.date}"></td>
-        <td>
-            <!-- <table class="nested-table">
-                <tr th:each="detail : ${record.details}">
-                    <td th:text="${detail.beer.name}">商品名</td>
-                    <td th:text="${detail.quantity} + ' 本'">数量</td>
-                </tr>
-            </table> -->
-        </td>
-    </tr>
-</table>
+        <tr th:each="record : ${salesList}">
+            <td th:text="${record.date}">販売日</td>
+            <td th:text="${record.beer.name}">商品名</td>
+            <td th:text="${record.quantity}">数量</td>
+        </tr>
+    </table>
 
 </body>
+
 </html>
