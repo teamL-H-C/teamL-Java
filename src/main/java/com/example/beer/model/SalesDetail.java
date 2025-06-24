@@ -1,8 +1,5 @@
 package com.example.beer.model;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import jakarta.persistence.*;
 
 @Entity
@@ -13,21 +10,18 @@ public class SalesDetail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "records_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "records_id", nullable = false)
     private SalesRecord salesRecord;
 
-    @ManyToOne
-    @JoinColumn(name = "beers_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "beers_id", nullable = false)
     private Beer beer;
 
     private Integer quantity;
 
-    private LocalDateTime date;
-
     public SalesDetail() {}
 
-    // --- Getter ---
     public Long getId() {
         return id;
     }
@@ -44,13 +38,8 @@ public class SalesDetail {
         return quantity;
     }
 
-    public LocalDateTime getDateTime() {
-        return date;
-    }
-
-    // ✔ グルーピング用（LocalDateだけ取り出す）
-    public LocalDate getDate() {
-        return date.toLocalDate();
+    public java.time.LocalDate getDate() {
+        return (salesRecord != null) ? salesRecord.getSalesDate() : null;
     }
 
     public void setSalesRecord(SalesRecord salesRecord) {
@@ -63,9 +52,5 @@ public class SalesDetail {
 
     public void setQuantity(Integer quantity) {
         this.quantity = quantity;
-    }
-
-    public void setDate(LocalDateTime date) {
-        this.date = date;
     }
 }
