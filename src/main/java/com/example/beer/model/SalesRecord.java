@@ -3,7 +3,6 @@ package com.example.beer.model;
 import jakarta.persistence.*;
 import java.util.List;
 import java.util.ArrayList;
-import java.rmi.registry.LocateRegistry;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 

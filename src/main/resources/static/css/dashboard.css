@@ -1,36 +1,61 @@
 /* dashboard.css - Styles for the dashboard page */
-body, html {
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap');
+
+body,
+html {
     cursor: url('/cursors/cat.cur'), auto;
 }
-.dashboard-card, .dashboard-card:active, .dashboard-card:focus {
+
+.dashboard-card,
+.dashboard-card:active,
+.dashboard-card:focus {
     cursor: url('/cursors/cat.cur'), pointer;
 }
-.dashboard-card:active, .dashboard-card:focus {
+
+.dashboard-card:active,
+.dashboard-card:focus {
     cursor: url('/cursors/thump.cur'), pointer;
 }
+
 body {
     background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Zen Maru Gothic', sans-serif;
     min-height: 100vh;
     margin: 0;
     padding: 0;
 }
+
 .dashboard-container {
     max-width: 1100px;
     margin: 40px auto;
-    background: rgba(255,255,255,0.97);
+    background: rgba(255, 255, 255, 0.97);
     border-radius: 18px;
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.18);
     padding: 40px 32px 32px 32px;
 }
+
+h2 {
+    text-align: center;
+    color: #000000;
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 2000;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+
+}
+
 .dashboard-title {
     text-align: center;
-    color: #333;
+    color: #dfcf1c;
+    font-family: 'Zen Maru Gothic', sans-serif;
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 32px;
     letter-spacing: 1px;
 }
+
 .dashboard-section {
     margin-bottom: 32px;
     padding: 24px;
@@ -38,9 +63,11 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(44, 62, 80, 0.06);
 }
+
 .dashboard-section:last-child {
     margin-bottom: 0;
 }
+
 .dashboard-card {
     display: inline-block;
     width: 220px;
@@ -51,42 +78,58 @@ body {
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(44, 62, 80, 0.10);
     text-align: center;
+    font-family: 'Zen Maru Gothic', sans-serif;
     font-size: 1.1rem;
     font-weight: 500;
     transition: transform 0.15s;
 }
+
 .dashboard-card:hover {
     transform: translateY(-4px) scale(1.04);
 }
+
 @media (max-width: 700px) {
     .dashboard-container {
         padding: 18px 4px 10px 4px;
     }
+
     .dashboard-title {
         font-size: 1.3rem;
     }
+
     .dashboard-card {
         width: 100%;
         margin: 10px 0;
     }
 }
+
 .emoji-bg {
     position: fixed;
-    top: 0; left: 0; width: 100vw; height: 100vh;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
     pointer-events: none;
     z-index: 0;
 }
+
 .emoji-bg span {
     position: absolute;
     font-size: 2.2rem;
     opacity: 0.18;
     animation: emoji-float 8s infinite linear;
 }
+
 @keyframes emoji-float {
-    0% { transform: translateY(0) scale(1) rotate(0deg); }
-    100% { transform: translateY(-60px) scale(1.1) rotate(20deg); }
+    0% {
+        transform: translateY(0) scale(1) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(-60px) scale(1.1) rotate(20deg);
+    }
 }
- 
+
 .dashboard-section {
     margin-bottom: 32px;
     padding: 24px;
@@ -96,8 +139,10 @@ body {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 16px; /* ボタン間の隙間 */
+    gap: 16px;
+    /* ボタン間の隙間 */
 }
+
 .dashboard-card {
     display: flex;
     align-items: center;
@@ -107,6 +152,7 @@ body {
     margin: 0;
     /* ...既存のスタイル... */
 }
+
 button.dashboard-card {
     width: 220px;
     min-height: 56px;
@@ -129,9 +175,26 @@ button.dashboard-card {
     justify-content: center;
     cursor: pointer;
 }
+
 button.dashboard-card:hover {
     transform: translateY(-6px) scale(1.06) rotate(-2deg);
     box-shadow: 0 8px 32px rgba(252, 183, 247, 0.22);
     background: linear-gradient(120deg, #a0c4ff 0%, #fcb7f7 100%);
     border: 2px solid #fff3;
+}
+
+.coming-soon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-10deg);
+    font-family: 'Cherry Bomb One', cursive;
+    font-size: 16px;
+    color: #ff69b4;
+    background-color: rgba(255, 240, 245, 0.6);
+    border: 1px solid #ff69b4;
+    border-radius: 4px;
+    padding: 1px 10px;
+    box-shadow: 0 0 3px rgba(255, 182, 193, 0.3);
+    pointer-events: none;
 }
