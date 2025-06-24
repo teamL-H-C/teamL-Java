@@ -31,17 +31,50 @@ public class SalesRecord {
     @JoinColumn(name = "sales_date", referencedColumnName = "date", insertable = false, updatable = false)
     private Weather weather;
 
-    public Long getId() { return id; }
-    public LocalDate getSalesDate() { return salesDate; }
-    public void setSalesDate(LocalDate salesDate) { this.salesDate = salesDate; }
-    public User getUser() { return user; }
-    public void setUser(User user) { this.user = user; }
-    public List<SalesDetail> getDetails() { return details; }
-    public void setDetails(List<SalesDetail> details) { this.details = details; }
-    public LocalDateTime getCreatedAt() { return created_at; }
-    public void setCreatedAt(LocalDateTime created_at) { this.created_at = created_at; }
-    public Weather getWeather() { return weather; }
-    public void setWeather(Weather weather) { this.weather = weather; }
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDate getSalesDate() {
+        return salesDate;
+    }
+
+    public void setSalesDate(LocalDate salesDate) {
+        this.salesDate = salesDate;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public List<SalesDetail> getDetails() {
+        return details;
+    }
+
+    public void setDetails(List<SalesDetail> details) {
+        this.details = details;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return created_at;
+    }
+
+    public void setCreatedAt(LocalDateTime created_at) {
+        this.created_at = created_at;
+    }
+
+    public Weather getWeather() {
+        return weather;
+    }
+
+    public void setWeather(Weather weather) {
+        this.weather = weather;
+    }
+
     public void addDetail(SalesDetail detail) {
         details.add(detail);
         detail.setSalesRecord(this);
