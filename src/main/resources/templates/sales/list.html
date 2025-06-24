@@ -4,15 +4,88 @@
 <head>
     <meta charset="UTF-8">
     <title>販売実績一覧</title>
-    <link rel="stylesheet" th:href="@{/css/list.css}">
+
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background: #f0f8ff;
+        }
+
+        .date-header {
+            margin-top: 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #444;
+        }
+
+        .filter-form {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .weather-info {
+            text-align: center;
+            margin: 10px 0;
+            font-size: 0.95em;
+            color: #555;
+        }
+    </style>
 </head>
-
 <body>
-    <div class="container">
-        <h1>販売実績一覧（日付別）</h1>
+<div class="container">
+    <h1>販売実績一覧（日付別）</h1>
 
+    <!-- 🔽 フィルターフォーム -->
+    <div class="filter-form">
+        <form th:action="@{/sales}" method="get">
+            <label for="date">日付を選択:</label>
+            <input type="date" id="date" name="date" th:value="${selectedDate}">
+            <button type="submit">検索</button>
+        </form>
+    </div>
+
+    <!-- 🔽 データ表示 -->
+    <div th:if="${groupedSales != null}">
         <div th:each="entry : ${groupedSales}">
             <h2 class="date-header" th:text="${#temporals.format(entry.key, 'yyyy年MM月dd日')}">日付</h2>
+
+            <!-- ✅ 天気情報（1つ目の item から取得） -->
+            <div class="weather-info" th:if="${entry.value[0].salesRecord.weather != null}">
+                天気: <span th:text="${entry.value[0].salesRecord.weather.condition}">晴れ</span> /
+                気温: <span th:text="${entry.value[0].salesRecord.weather.temperature}">22.0</span>℃ 
+            </div>
 
             <table>
                 <thead>

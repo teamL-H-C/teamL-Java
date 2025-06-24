@@ -6,38 +6,56 @@ import com.example.beer.repository.SalesDetailRepository;
 import com.example.beer.repository.SalesRecordRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class SalesService {
 
-    private final SalesRecordRepository salesRepository;
+    private final SalesRecordRepository salesRecordRepository;
     private final SalesDetailRepository salesDetailRepository;
 
-    public SalesService(SalesRecordRepository salesRepository,
+    public SalesService(SalesRecordRepository salesRecordRepository,
                         SalesDetailRepository salesDetailRepository) {
-        this.salesRepository = salesRepository;
+        this.salesRecordRepository = salesRecordRepository;
         this.salesDetailRepository = salesDetailRepository;
     }
 
     public List<SalesDetail> findDetailAll() {
-        return salesDetailRepository.findAll();
+        return salesDetailRepository.findAll().stream()
+                .filter(detail -> detail.getSalesRecord() != null)
+                .collect(Collectors.toList());
     }
 
-    public List<SalesRecord> findAll() {
-        return salesRepository.findAll();
+    public List<SalesDetail> findDetailsByDate(LocalDate date) {
+        return salesDetailRepository.findBySalesRecord_SalesDate(date).stream()
+                .filter(detail -> detail.getSalesRecord() != null)
+                .collect(Collectors.toList());
     }
 
-    public Optional<SalesRecord> findById(Long id) {
-        return salesRepository.findById(id);
+    public List<SalesRecord> findAllRecords() {
+        return salesRecordRepository.findAll();
     }
 
-    public SalesRecord save(SalesRecord record) {
-        return salesRepository.save(record);
+    public Optional<SalesRecord> findRecordById(Long id) {
+        return salesRecordRepository.findById(id);
     }
 
-    public void delete(Long id) {
-        salesRepository.deleteById(id);
+    public SalesRecord saveRecord(SalesRecord record) {
+        return salesRecordRepository.save(record);
+    }
+
+    public void deleteRecord(Long id) {
+        salesRecordRepository.deleteById(id);
+    }
+
+    public List<SalesRecord> findRecordsByDate(LocalDate date) {
+        return salesRecordRepository.findBySalesDate(date);
+    }
+
+    public List<SalesRecord> findRecordsBetween(LocalDate start, LocalDate end) {
+        return salesRecordRepository.findBySalesDateBetween(start, end);
     }
 }
