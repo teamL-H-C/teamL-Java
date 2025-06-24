@@ -1,21 +1,21 @@
+
 package com.example.beer.model;
 
 import jakarta.persistence.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.rmi.registry.LocateRegistry;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "sales_records")
 public class SalesRecord {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private LocalDate sales_date;
+    @Column(name = "sales_date")
+    private LocalDate salesDate;
 
     @ManyToOne
     @JoinColumn(name = "users_id")
@@ -26,11 +26,23 @@ public class SalesRecord {
 
     private LocalDateTime created_at;
 
-    public SalesRecord() {
-    }
+    @ManyToOne
+    @JoinColumn(name = "sales_date", referencedColumnName = "date", insertable = false, updatable = false)
+    private Weather weather;
 
-    public List<SalesDetail> getDetails() {
-        return details;
+    public Long getId() { return id; }
+    public LocalDate getSalesDate() { return salesDate; }
+    public void setSalesDate(LocalDate salesDate) { this.salesDate = salesDate; }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
+    public List<SalesDetail> getDetails() { return details; }
+    public void setDetails(List<SalesDetail> details) { this.details = details; }
+    public LocalDateTime getCreatedAt() { return created_at; }
+    public void setCreatedAt(LocalDateTime created_at) { this.created_at = created_at; }
+    public Weather getWeather() { return weather; }
+    public void setWeather(Weather weather) { this.weather = weather; }
+    public void addDetail(SalesDetail detail) {
+        details.add(detail);
+        detail.setSalesRecord(this);
     }
-
 }
