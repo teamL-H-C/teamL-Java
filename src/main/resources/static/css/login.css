@@ -1,8 +1,9 @@
 /* login.css - Beautiful styles for the login page */
+@import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap');
  
 body {
     background: linear-gradient(135deg, #74ebd5 0%, #ACB6E5 100%);
-    font-family: 'Segoe UI', Arial, sans-serif;
+    font-family: 'Zen Maru Gothic', sans-serif;
     min-height: 100vh;
     margin: 0;
     padding: 0;

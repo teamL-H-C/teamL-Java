@@ -9,44 +9,79 @@
 <body>
     <!-- 管理者専用 -->
     <div sec:authorize="hasRole('ROLE_ADMIN')" class="dashboard-section">
-    <h2 th:text="${username + 'さん、こんにちは！'}"></h2>
+        <h2 th:text="${username + 'さん、こんにちは！'}"></h2>
 
-    <div class="emoji-bg">
-        <span style="left:10%;top:20%;">🍺</span>
-        <span style="left:30%;top:60%;">🍻</span>
-        <span style="left:70%;top:40%;">🍺</span>
-        <span style="left:80%;top:10%;">🍻</span>
-        <span style="left:50%;top:80%;">🍺</span>
-        <span style="left:20%;top:70%;">🍻</span>
-    </div>
-    <div class="dashboard-section">
-        <a class="dashboard-card" href="/sales">販売実績一覧</a>
-        <a class="dashboard-card" href="/sales-new">販売実績登録 <span class="coming-soon">Coming Soon</span></a>
-        <a class="dashboard-card" href="/sales/{id}/edit">販売実績編集 <span class="coming-soon">Coming Soon</span></a>
-        <a class="dashboard-card" href="/beers">商品一覧</a>
-        <a class="dashboard-card" href="/beers-new">商品登録 <span class="coming-soon">Coming Soon</span></a>
-        <a class="dashboard-card" href="/beers/{id}/edit">商品編集 <span class="coming-soon">Coming Soon</span></a>
-        <a class="dashboard-card" href="/users">ユーザー一覧</a>
-        <a class="dashboard-card" href="/users-new">ユーザー登録 <span class="coming-soon">Coming Soon</span></a>
-        <a class="dashboard-card" href="/users/{id}/edit">ユーザー編集 <span class="coming-soon">Coming Soon</span></a>
-        <form action="/analytics/weekly" method="get" style="display:inline;">
-            <button class="dashboard-card" type="submit">📊 発注予測分析</button>
-        </form>
-        <a class="dashboard-card" href="/logout">ログアウト</a>
-    </div>
-    </div>
+        <div class="emoji-bg">
+            <span style="left:10%;top:20%;">🍺</span>
+            <span style="left:30%;top:60%;">🍻</span>
+            <span style="left:70%;top:40%;">🍺</span>
+            <span style="left:80%;top:10%;">🍻</span>
+            <span style="left:50%;top:80%;">🍺</span>
+            <span style="left:20%;top:70%;">🍻</span>
+        </div>
+        <div class="dashboard-section">
 
-    <style>
-        .coming-soon {
-            font-size: 0.8em;
-            color: #ff9800;
-            background: #fff3e0;
-            border-radius: 8px;
-            padding: 2px 6px;
-            margin-left: 6px;
-            vertical-align: middle;
-        }
-    </style>
+            <form action="/sales" method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">販売実績一覧</button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    販売実績登録 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    販売実績編集 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    商品一覧 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    商品登録 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    商品編集 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    ユーザー一覧<span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    ユーザー登録 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    ユーザー編集 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form action="/analytics/weekly" method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">発注予測分析</button>
+            </form>
+
+            <form action="/logout" method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">ログアウト</button>
+            </form>
+        </div>
+    </div>
 
     <!-- 従業員専用 -->
     <div sec:authorize="hasRole('ROLE_STAFF')" class="dashboard-section">
@@ -60,26 +95,37 @@
         <h2 th:text="${username + 'さん、こんにちは！'}"></h2>
 
         <div class="dashboard-section">
-            <a class="dashboard-card" href="/sales">販売実績一覧</a>
-            <a class="dashboard-card" href="/sales-new">販売実績登録 <span class="coming-soon">Coming Soon</span></a>
-            <a class="dashboard-card" href="/sales/{id}/edit">販売実績編集 <span class="coming-soon">Coming Soon</span></a>
-            <a class="dashboard-card" href="/beers">商品一覧</a>
-            <form action="/analytics/weekly" method="get" style="display:inline;">
-                <button class="dashboard-card" type="submit">📊 発注予測分析</button>
-            </form>
-            <a class="dashboard-card" href="/logout">ログアウト</a>
-        </div>
 
-        <style>
-            .coming-soon {
-                font-size: 0.8em;
-                color: #ff9800;
-                background: #fff3e0;
-                border-radius: 8px;
-                padding: 2px 6px;
-                margin-left: 6px;
-                vertical-align: middle;
-            }
-        </style>
+            <form action="/sales" method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">販売実績一覧</button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    販売実績登録 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    販売実績編集 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">
+                    商品一覧 <span class="coming-soon">Coming Soon</span>
+                </button>
+            </form>
+
+            <form action="/analytics/weekly" method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">発注予測分析</button>
+            </form>
+
+            <form action="/logout" method="get" style="display:inline;">
+                <button class="dashboard-card" type="submit">ログアウト</button>
+            </form>
+        </div>
 </body>
+
 </html>
